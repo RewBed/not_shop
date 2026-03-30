@@ -1,0 +1,35 @@
+<svg width="1920" height="920" viewBox="0 0 1920 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="120" x2="1740" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0D253B"/>
+      <stop offset="0.58" stop-color="#175480"/>
+      <stop offset="1" stop-color="#0E8C78"/>
+    </linearGradient>
+    <radialGradient id="spotA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(420 220) rotate(22) scale(360 260)">
+      <stop stop-color="#65B8FF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#65B8FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="spotB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1440 710) rotate(-15) scale(420 280)">
+      <stop stop-color="#7DF0D4" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#7DF0D4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="920" fill="url(#bg)"/>
+  <rect width="1920" height="920" fill="url(#spotA)"/>
+  <rect width="1920" height="920" fill="url(#spotB)"/>
+
+  <g opacity="0.2" stroke="#E7F7FF" stroke-width="1">
+    <path d="M0 790C226 706 386 674 584 684C795 694 952 761 1179 756C1448 750 1658 648 1920 606"/>
+    <path d="M0 862C249 808 421 775 603 778C807 781 978 832 1187 826C1454 818 1669 731 1920 683"/>
+  </g>
+
+  <g opacity="0.18" fill="#FFFFFF">
+    <circle cx="240" cy="126" r="2.6"/>
+    <circle cx="318" cy="186" r="1.9"/>
+    <circle cx="1482" cy="240" r="2.8"/>
+    <circle cx="1600" cy="332" r="1.8"/>
+    <circle cx="1240" cy="694" r="2.4"/>
+    <circle cx="1344" cy="760" r="1.7"/>
+  </g>
+</svg>

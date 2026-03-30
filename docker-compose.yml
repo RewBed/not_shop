@@ -1,0 +1,24 @@
+services:
+  landing:
+    container_name: landing-nuxt
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      NITRO_HOST: 0.0.0.0
+      NITRO_PORT: 3000
+      VIRTUAL_HOST: ${AUTO_SSL_VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${AUTO_SSL_LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${AUTO_SSL_LETSENCRYPT_EMAIL}
+      VIRTUAL_PORT: ${AUTO_SSL_VIRTUAL_PORT}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - ssl-proxy
+    restart: unless-stopped
+
+networks:
+  ssl-proxy:
+    driver: bridge
+    name: ssl-proxy

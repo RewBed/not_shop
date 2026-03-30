@@ -1,0 +1,13 @@
+.git
+.gitignore
+.nuxt
+.nitro
+.output
+.cache
+.data
+dist
+node_modules
+*.log
+.env
+.env.*
+npm-debug.log*
