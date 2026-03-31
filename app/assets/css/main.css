@@ -929,6 +929,77 @@ a {
   font-size: 0.9rem;
 }
 
+.legal-page {
+  padding-bottom: 0;
+}
+
+.legal-section {
+  padding-top: 1.3rem;
+  padding-bottom: 2.6rem;
+}
+
+.legal-shell {
+  width: min(980px, 92vw);
+}
+
+.legal-head h1 {
+  font-size: clamp(1.35rem, 2.3vw, 2.1rem);
+}
+
+.legal-subtitle {
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.legal-card {
+  border-radius: 0 !important;
+}
+
+.legal-status {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.legal-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.62;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.legal-rich {
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.62;
+}
+
+.legal-rich h2 {
+  margin: 1rem 0 0.55rem;
+  font-size: 1.05rem;
+}
+
+.legal-rich h3 {
+  margin: 0.85rem 0 0.42rem;
+  font-size: 0.96rem;
+}
+
+.legal-rich p {
+  margin: 0.45rem 0;
+}
+
+.legal-rich ul {
+  margin: 0.38rem 0 0.7rem 1.1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.24rem;
+}
+
+.legal-rich li {
+  margin: 0;
+}
+
 .floating-cta {
   position: fixed !important;
   right: 1rem;

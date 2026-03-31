@@ -1066,13 +1066,17 @@ useSeoMeta({
           <UIcon name="ri:mail-line" />
           hello@landings-stock.ru
         </a>
-        <a href="#">
+        <a href="/policy-pd">
           <UIcon name="ri:shield-check-line" />
-          Политика
+          Политика ПД
         </a>
-        <a href="#">
-          <UIcon name="ri:instagram-line" />
-          Соцсети
+        <a href="/soglasie-pd">
+          <UIcon name="ri:file-list-3-line" />
+          Согласие ПД
+        </a>
+        <a href="/oferta">
+          <UIcon name="ri:article-line" />
+          Оферта
         </a>
       </div>
     </footer>
