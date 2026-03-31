@@ -11,21 +11,26 @@ interface HeroSlideMetric {
 interface HeroSlide {
   id: PlanId
   eyebrow: string
-  title: string
-  subtitle: string
+  planTag: string
   icon: string
-  previewLabel: string
+  previewImage: string
   bullets: string[]
   metrics: HeroSlideMetric[]
 }
 
-interface AudienceCard {
+interface TrustItem {
   title: string
-  pain: string
+  description: string
   icon: string
 }
 
-interface SolutionCard {
+interface AudienceCard {
+  title: string
+  description: string
+  icon: string
+}
+
+interface BenefitCard {
   title: string
   description: string
   icon: string
@@ -35,14 +40,16 @@ interface Plan {
   id: PlanId
   label: string
   title: string
-  summary: string
+  description: string
   features: string[]
   price: string
   icon: string
+  selectLabel: string
   featured?: boolean
 }
 
-interface IncludedFeature {
+interface ChooseOption {
+  id: PlanId
   title: string
   description: string
   icon: string
@@ -58,7 +65,14 @@ interface DemoItem {
   id: string
   tariff: PlanId
   title: string
+  description: string
   format: string
+  icon: string
+}
+
+interface IncludedFeature {
+  title: string
+  description: string
   icon: string
 }
 
@@ -69,10 +83,10 @@ interface ComparisonRow {
   premium: string
 }
 
-interface Testimonial {
-  company: string
-  result: string
-  quote: string
+interface CaseItem {
+  title: string
+  subtitle: string
+  description: string
 }
 
 interface FaqItem {
@@ -80,167 +94,295 @@ interface FaqItem {
   answer: string
 }
 
+const heroTitle = 'Готовые лендинги под запуск рекламы и продажи'
+const heroSubtitle = 'Выберите формат под свою задачу: быстрый старт, стабильный поток заявок или премиальная подача под высокий чек.'
+const heroMicroText = 'Без долгой разработки, сложных брифов и лишних согласований.'
+const heroQuickBenefits = [
+  'Запуск за 1-3 дня',
+  'Под рекламу и заявки',
+  '3 уровня упаковки',
+  'Адаптация под ваш оффер'
+]
+
 const heroSlides: HeroSlide[] = [
   {
     id: 'start',
-    eyebrow: 'Лендинги под разные этапы роста',
-    title: 'Готовые лендинги под ваш масштаб бизнеса - запуститесь за 1-3 дня',
-    subtitle: 'Вариант Старт: быстро проверяете спрос и не тратите время на долгую разработку.',
+    eyebrow: 'Старт без лишних шагов',
+    planTag: 'Лендинг Start',
     icon: 'ri:seedling-line',
-    previewLabel: 'Заглушка: демо тарифа Старт',
-    bullets: ['1 лендинг', 'Базовая структура', 'Минимальный дизайн', 'Быстрый запуск рекламы'],
+    previewImage: '/images/hero-slider/start.jpg',
+    bullets: [
+      'Быстрая сборка без лишней сложности',
+      'Базовая структура лендинга',
+      'Минимум текста и быстрый старт',
+      'Подходит для первого запуска рекламы'
+    ],
     metrics: [
-      { value: '1-2 дня', label: 'Запуск после выбора', icon: 'ri:timer-flash-line' },
-      { value: '1 лендинг', label: 'Для теста ниши', icon: 'ri:layout-grid-line' },
-      { value: 'Минимум затрат', label: 'Без лишней разработки', icon: 'ri:wallet-3-line' }
+      { value: 'от 19 000 ₽', label: 'Базовый формат', icon: 'ri:wallet-3-line' },
+      { value: '1-3 дня', label: 'Срок запуска', icon: 'ri:timer-flash-line' },
+      { value: '1 оффер', label: 'Тест ниши', icon: 'ri:layout-grid-line' }
     ]
   },
   {
     id: 'business',
-    eyebrow: 'Лендинги под разные этапы роста',
-    title: 'Вариант Бизнес - продуманная структура и инструменты для роста заявок',
-    subtitle: 'Оптимальный пакет: воронка, анимации, формы и кастомизация без потери темпа запуска.',
+    eyebrow: 'Оптимальный рабочий формат',
+    planTag: 'Лендинг Business',
     icon: 'ri:briefcase-4-line',
-    previewLabel: 'Заглушка: демо тарифа Бизнес',
-    bullets: ['Сложная структура', 'Анимации', 'Подключение форм', 'Базовая кастомизация'],
+    previewImage: '/images/hero-slider/Business.jpg',
+    bullets: [
+      'Расширенная структура лендинга',
+      'Кейсы, отзывы, тарифы, CTA',
+      'Несколько точек захвата заявок',
+      'Лучше адаптирован под рекламный трафик'
+    ],
     metrics: [
-      { value: '3-5 блоков', label: 'Глубина лендинга', icon: 'ri:pages-line' },
-      { value: 'Формы + CTA', label: 'Сбор заявок', icon: 'ri:mail-send-line' },
-      { value: 'Рост конверсии', label: 'За счет UX', icon: 'ri:line-chart-line' }
+      { value: 'от 49 000 ₽', label: 'Рекомендуемый формат', icon: 'ri:price-tag-3-line' },
+      { value: 'Доверие + кейсы', label: 'Сильная подача', icon: 'ri:shield-check-line' },
+      { value: 'Стабильный поток', label: 'Под трафик и заявки', icon: 'ri:line-chart-line' }
     ]
   },
   {
     id: 'premium',
-    eyebrow: 'Лендинги под разные этапы роста',
-    title: 'Вариант Премиум - максимум структуры, кастомизации и интеграций',
-    subtitle: 'Для масштабирования сложных продуктов: CRM, аналитика, глубокая настройка и поддержка.',
+    eyebrow: 'Под высокий чек и B2B',
+    planTag: 'Лендинг Premium',
     icon: 'ri:vip-crown-2-line',
-    previewLabel: 'Заглушка: демо тарифа Премиум',
-    bullets: ['Максимальная структура', 'Глубокая кастомизация', 'Интеграции CRM/аналитика', 'Поддержка'],
+    previewImage: '/images/hero-slider/Premium.jpg',
+    bullets: [
+      'Премиальная подача и глубокая упаковка',
+      'Усиленные блоки доверия и аргументации',
+      'Несколько сценариев захвата заявок',
+      'Интеграции и приоритетная поддержка'
+    ],
     metrics: [
-      { value: '10+ блоков', label: 'Сложные воронки', icon: 'ri:git-merge-line' },
-      { value: 'Интеграции', label: 'CRM и аналитика', icon: 'ri:links-line' },
-      { value: 'Приоритет', label: 'Поддержка и развитие', icon: 'ri:customer-service-2-line' }
+      { value: 'от 99 000 ₽', label: 'Премиальный формат', icon: 'ri:vip-diamond-line' },
+      { value: 'Высокий чек', label: 'Сложные продажи', icon: 'ri:auction-line' },
+      { value: 'Приоритет', label: 'Поддержка и интеграции', icon: 'ri:customer-service-2-line' }
     ]
+  }
+]
+
+const trustItems: TrustItem[] = [
+  {
+    title: 'Быстрый запуск',
+    description: 'Не тратите недели на разработку с нуля и бесконечные правки.',
+    icon: 'ri:flashlight-line'
+  },
+  {
+    title: 'Понятная структура',
+    description: 'Лендинг уже собран по логике, которая ведет пользователя к заявке.',
+    icon: 'ri:route-line'
+  },
+  {
+    title: 'Выбор под ваш этап',
+    description: 'Можно начать с простого варианта или сразу взять сильную упаковку под высокий чек.',
+    icon: 'ri:stack-line'
   }
 ]
 
 const audienceCards: AudienceCard[] = [
   {
-    title: 'Стартапы',
-    pain: 'Быстрый старт в новой нише и проверка гипотез с минимальными рисками.',
-    icon: 'ri:rocket-line'
-  },
-  {
-    title: 'Эксперты',
-    pain: 'Запуск страницы услуг без долгого продакшена и сложной разработки.',
+    title: 'Эксперты и услуги',
+    description: 'Чтобы быстро упаковать одну услугу, показать выгоды и начать собирать заявки без сложной разработки.',
     icon: 'ri:user-star-line'
   },
   {
-    title: 'E-commerce',
-    pain: 'Готовые продуктовые блоки для продажи онлайн без кастомного бюджета.',
-    icon: 'ri:shopping-bag-4-line'
+    title: 'Студии и сервисные компании',
+    description: 'Чтобы получить более сильную подачу, повысить доверие и стабильно вести трафик на понятный оффер.',
+    icon: 'ri:building-4-line'
   },
   {
-    title: 'Агентства',
-    pain: 'Повторяемый шаблон для разных клиентов и масштабирования офферов.',
-    icon: 'ri:building-4-line'
+    title: 'Маркетологи и малый бизнес',
+    description: 'Чтобы быстро запускать офферы, тестировать спрос и не тратить лишнее на долгий продакшн.',
+    icon: 'ri:megaphone-line'
+  },
+  {
+    title: 'B2B, консалтинг, премиальные услуги',
+    description: 'Чтобы презентовать дорогой продукт серьезно, убедительно и без ощущения шаблонного сайта.',
+    icon: 'ri:briefcase-4-line'
   }
 ]
 
 const problems = [
-  'Долго делать сайт',
-  'Дорого у разработчиков',
-  'Нет понимания структуры',
-  'Сайт не конвертит'
+  'Сайт делают слишком долго',
+  'Непонятно, какие блоки нужны',
+  'Бюджет уходит в разработку, а не в рекламу',
+  'Лендинг выглядит слабо и не вызывает доверия',
+  'Нет понятной логики, как довести человека до заявки'
 ]
 
-const solutions: SolutionCard[] = [
+const problemSolutions = [
+  'Готовую структуру под запуск',
+  'Проверенные блоки под оффер и доверие',
+  'Понятный выбор из 3 форматов',
+  'Быстрый старт без лишней разработки',
+  'Лендинг, который проще адаптировать под рекламу'
+]
+
+const benefits: BenefitCard[] = [
   {
-    title: 'Готовые шаблоны',
-    description: 'Быстрый старт без долгого проектирования структуры.',
-    icon: 'ri:layout-grid-line'
+    title: 'Готовый лендинг под ваш оффер',
+    description: 'Не пустой шаблон, а страница, которую можно быстро адаптировать под вашу услугу или продукт.',
+    icon: 'ri:layout-4-line'
   },
   {
-    title: 'Проверенные блоки',
-    description: 'Контентные секции уже адаптированы под конверсию.',
-    icon: 'ri:shield-check-line'
+    title: 'Структуру под заявки',
+    description: 'Первый экран, выгоды, доверие, CTA и форма уже выстроены в понятную логику.',
+    icon: 'ri:route-line'
   },
   {
-    title: 'Быстрый запуск',
-    description: 'Собираете страницу и запускаете трафик в короткие сроки.',
+    title: 'Адаптацию под устройства',
+    description: 'Лендинг корректно выглядит на телефоне, планшете и десктопе.',
+    icon: 'ri:smartphone-line'
+  },
+  {
+    title: 'Готовность к рекламе',
+    description: 'Страница подходит для быстрого запуска трафика и первого теста спроса.',
     icon: 'ri:rocket-line'
   },
   {
-    title: 'Продуманный UX',
-    description: 'Пользовательский путь уже выстроен до целевого действия.',
-    icon: 'ri:cursor-line'
+    title: 'Формы захвата заявок',
+    description: 'Понятные точки входа, чтобы не терять внимание пользователя по пути.',
+    icon: 'ri:mail-send-line'
+  },
+  {
+    title: 'Уровень упаковки под задачу',
+    description: 'Можно выбрать быстрый, усиленный или премиальный формат - без переплаты за лишнее.',
+    icon: 'ri:vip-crown-2-line'
   }
 ]
 
 const plans: Plan[] = [
   {
     id: 'start',
-    label: 'Старт',
+    label: 'Лендинг Start',
     title: 'Быстрый запуск',
-    summary: '1 лендинг для теста гипотезы',
-    features: ['Базовая структура', 'Минимальный дизайн', 'Без кастомизации'],
+    description: 'Подходит для теста ниши, одной услуги или первого оффера.',
+    features: [
+      'Быстрая сборка без лишней сложности',
+      'Базовая структура лендинга',
+      'Минимум текста и быстрый старт',
+      'Подходит для первого запуска рекламы'
+    ],
     price: 'от 19 000 ₽',
-    icon: 'ri:flashlight-line'
+    icon: 'ri:flashlight-line',
+    selectLabel: 'Выбрать Start'
   },
   {
     id: 'business',
-    label: 'Бизнес',
-    title: 'Оптимальный рост',
-    summary: 'Сбалансированный вариант для заявок',
-    features: ['Сложная структура', 'Анимации', 'Подключение форм', 'Базовая кастомизация'],
+    label: 'Лендинг Business',
+    title: 'Стабильный поток заявок',
+    description: 'Оптимальный вариант для бизнеса, которому уже нужна более сильная упаковка и доверие.',
+    features: [
+      'Расширенная структура лендинга',
+      'Кейсы, отзывы, тарифы, CTA',
+      'Несколько точек захвата заявок',
+      'Лучше адаптирован под рекламный трафик'
+    ],
     price: 'от 49 000 ₽',
     icon: 'ri:briefcase-4-line',
+    selectLabel: 'Выбрать Business',
     featured: true
   },
   {
     id: 'premium',
-    label: 'Премиум',
-    title: 'Максимум возможностей',
-    summary: 'Глубокая адаптация под ваш процесс',
-    features: ['Максимальная структура', 'Глубокая кастомизация', 'CRM и аналитика', 'Приоритетная поддержка'],
+    label: 'Лендинг Premium',
+    title: 'Высокий чек. Сильная подача.',
+    description: 'Для дорогих услуг, сложных продаж и серьезной презентации продукта.',
+    features: [
+      'Премиальная подача и глубокая упаковка',
+      'Усиленные блоки доверия и аргументации',
+      'Несколько сценариев захвата заявок',
+      'Интеграции и приоритетная поддержка'
+    ],
     price: 'от 99 000 ₽',
-    icon: 'ri:vip-diamond-line'
+    icon: 'ri:vip-diamond-line',
+    selectLabel: 'Выбрать Premium'
   }
 ]
 
 const tariffLabel: Record<PlanId, string> = {
-  start: 'Старт',
-  business: 'Бизнес',
-  premium: 'Премиум'
+  start: 'Start',
+  business: 'Business',
+  premium: 'Premium'
 }
+
+const chooseOptions: ChooseOption[] = [
+  {
+    id: 'start',
+    title: 'Start',
+    description: 'Если нужно быстро запуститься, проверить спрос или собрать простую страницу под одну услугу.',
+    icon: 'ri:seedling-line'
+  },
+  {
+    id: 'business',
+    title: 'Business',
+    description: 'Если уже нужен более убедительный лендинг с доверием, кейсами и стабильной подачей под трафик.',
+    icon: 'ri:briefcase-4-line'
+  },
+  {
+    id: 'premium',
+    title: 'Premium',
+    description: 'Если продаете дорогую услугу, работаете в B2B или хотите максимально сильную упаковку под высокий чек.',
+    icon: 'ri:vip-crown-2-line'
+  }
+]
+
+const chooseMicroCta = 'Не уверены, что выбрать? Оставьте заявку - подскажем, какой формат подойдет под вашу задачу.'
+
+const flowSteps: FlowStep[] = [
+  {
+    title: 'Выбираете формат',
+    description: 'Определяем, какой уровень упаковки нужен: быстрый старт, усиленная подача или премиум-версия под высокий чек.',
+    icon: 'ri:price-tag-3-line'
+  },
+  {
+    title: 'Согласовываем основу',
+    description: 'Берем ваш оффер, услугу или продукт и подстраиваем структуру под задачу.',
+    icon: 'ri:chat-check-line'
+  },
+  {
+    title: 'Собираем лендинг',
+    description: 'Заполняем контент, настраиваем ключевые блоки, формы и точки захвата заявок.',
+    icon: 'ri:file-edit-line'
+  },
+  {
+    title: 'Передаем в запуск',
+    description: 'Вы получаете готовую страницу, которую можно использовать для рекламы, продаж и сбора заявок.',
+    icon: 'ri:rocket-2-line'
+  }
+]
+
+const flowHelpText = 'При необходимости помогаем с публикацией, настройкой и следующими доработками.'
 
 const demoTabs = [
   { value: 'all', label: 'Все тарифы', icon: 'ri:list-check-2' },
-  { value: 'start', label: 'Старт', icon: 'ri:seedling' },
-  { value: 'business', label: 'Бизнес', icon: 'ri:briefcase-4' },
-  { value: 'premium', label: 'Премиум', icon: 'ri:vip-crown-2' }
+  { value: 'start', label: 'Start', icon: 'ri:seedling' },
+  { value: 'business', label: 'Business', icon: 'ri:briefcase-4' },
+  { value: 'premium', label: 'Premium', icon: 'ri:vip-crown-2' }
 ]
 
 const demoItems: DemoItem[] = [
   {
     id: 'demo-start',
     tariff: 'start',
-    title: 'Демо: запуск ниши',
+    title: 'Start - быстрый запуск',
+    description: 'Минимум лишнего, чистая структура и быстрый выход в рекламу.',
     format: 'Скриншот / видео',
     icon: 'ri:image-2-line'
   },
   {
     id: 'demo-business',
     tariff: 'business',
-    title: 'Демо: воронка услуг',
+    title: 'Business - стабильный поток заявок',
+    description: 'Больше доверия, глубже упаковка и сильнее подача оффера.',
     format: 'Скриншот / видео',
     icon: 'ri:play-circle-line'
   },
   {
     id: 'demo-premium',
     tariff: 'premium',
-    title: 'Демо: сложный продукт',
+    title: 'Premium - под высокий чек',
+    description: 'Статусная подача, усиленная аргументация и серьезное ощущение продукта.',
     format: 'Скриншот / видео',
     icon: 'ri:slideshow-4-line'
   }
@@ -249,103 +391,126 @@ const demoItems: DemoItem[] = [
 const includedFeatures: IncludedFeature[] = [
   {
     title: 'Готовая структура блоков',
-    description: 'Секции уже собраны в правильной последовательности для заявки.',
+    description: 'Логика страницы уже собрана: от оффера и выгод до заявки и финального CTA.',
     icon: 'ri:layout-grid-line'
   },
   {
     title: 'Адаптивность',
-    description: 'Корректно выглядит на телефонах, планшетах и десктопе.',
+    description: 'Лендинг корректно смотрится на телефоне, планшете и десктопе.',
     icon: 'ri:smartphone-line'
   },
   {
-    title: 'SEO-база',
-    description: 'Базовая техническая подготовка под индексацию и скорость.',
-    icon: 'ri:search-eye-line'
-  },
-  {
     title: 'Формы заявок',
-    description: 'Готовые точки сбора лидов с понятными сценариями действия.',
+    description: 'Понятные точки захвата, чтобы пользователь мог оставить заявку без лишних действий.',
     icon: 'ri:mail-send-line'
   },
   {
+    title: 'Подготовка под запуск',
+    description: 'Страница подходит для старта рекламы и быстрой адаптации под ваш оффер.',
+    icon: 'ri:rocket-line'
+  },
+  {
     title: 'Быстрая загрузка',
-    description: 'Оптимизированная структура для быстрого старта рекламы.',
-    icon: 'ri:rocket-2-line'
-  }
-]
-
-const flowSteps: FlowStep[] = [
-  {
-    title: 'Выбираете тариф',
-    description: 'Сравниваете варианты Старт, Бизнес и Премиум, чтобы подобрать нужную глубину структуры и функциональности.',
-    icon: 'ri:price-tag-3-line'
-  },
-  {
-    title: 'Получаете шаблон',
-    description: 'Сразу получаете готовый лендинг с продуманной архитектурой блоков, адаптивной сеткой и базовыми настройками.',
-    icon: 'ri:folder-download-line'
-  },
-  {
-    title: 'Заполняете контент',
-    description: 'Меняете тексты, оффер, изображения и CTA под свою нишу без долгой разработки и бесконечных правок.',
-    icon: 'ri:file-edit-line'
-  },
-  {
-    title: 'Запускаете рекламу',
-    description: 'Подключаете источники трафика и начинаете собирать заявки, используя уже подготовленный конверсионный сценарий.',
-    icon: 'ri:megaphone-line'
+    description: 'Без перегруза лишними элементами - с фокусом на скорость и понятную подачу.',
+    icon: 'ri:timer-flash-line'
   }
 ]
 
 const comparisonRows: ComparisonRow[] = [
-  { feature: 'Блоки', start: '1 набор', business: '2 набора', premium: '3+ наборов' },
-  { feature: 'Кастомизация', start: 'Нет', business: 'Частично', premium: 'Полная' },
-  { feature: 'Интеграции', start: 'Нет', business: 'Базовые', premium: 'Расширенные' },
-  { feature: 'Поддержка', start: 'Нет', business: 'Стандарт', premium: 'Приоритет' }
+  { feature: 'Скорость запуска', start: '1-3 дня', business: '1-3 дня', premium: '1-3 дня' },
+  { feature: 'Упаковка оффера', start: 'Базовая', business: 'Усиленная', premium: 'Премиальная' },
+  { feature: 'Блоки доверия', start: 'Базовые', business: 'Кейсы и отзывы', premium: 'Усиленная аргументация' },
+  { feature: 'Сценарии заявок', start: 'Один сценарий', business: 'Несколько точек', premium: 'Несколько сценариев' },
+  { feature: 'Поддержка', start: 'Базовая', business: 'Расширенная', premium: 'Приоритетная' }
 ]
 
 const comparisonColumns = [
-  { accessorKey: 'feature', header: 'Функция' },
-  { accessorKey: 'start', header: 'Старт' },
-  { accessorKey: 'business', header: 'Бизнес' },
-  { accessorKey: 'premium', header: 'Премиум' }
+  { accessorKey: 'feature', header: 'Параметр' },
+  { accessorKey: 'start', header: 'Start' },
+  { accessorKey: 'business', header: 'Business' },
+  { accessorKey: 'premium', header: 'Premium' }
 ]
 
-const testimonials: Testimonial[] = [
+const comparisonCtaTitle = 'Не уверены, какой вариант выбрать?'
+const comparisonCtaText = 'Опишите коротко, что вы продаете, и мы подскажем, какой лендинг подойдет под вашу задачу и бюджет.'
+
+const caseItems: CaseItem[] = [
   {
-    company: 'EduStart',
-    result: '+34% заявок за 2 недели',
-    quote: 'Запустили лендинг за три дня и сразу пошли лиды.'
+    title: 'Лендинг для запуска новой услуги',
+    subtitle: 'Быстро собрали страницу под тест ниши.',
+    description: 'Сделали понятную структуру, оффер и форму заявки, чтобы можно было выйти в рекламу без долгой разработки.'
   },
   {
-    company: 'Fit Expert',
-    result: 'CPL ниже на 27%',
-    quote: 'Взяли готовую структуру и быстро адаптировали под оффер.'
+    title: 'Лендинг для сервисной компании',
+    subtitle: 'Усилили доверие и подачу оффера.',
+    description: 'Добавили блоки выгод, отзывы, несколько CTA и более сильную упаковку под стабильный поток заявок.'
   },
   {
-    company: 'Shopline',
-    result: 'Конверсия выросла с 1.8% до 3.1%',
-    quote: 'Удобно, что UX уже продуман: меньше догадок и переделок.'
+    title: 'Лендинг для дорогой услуги',
+    subtitle: 'Сделали серьезную подачу под высокий чек.',
+    description: 'Собрали премиальную структуру, усилили аргументацию и подготовили страницу под сложную продажу.'
   }
+]
+
+const fitList = [
+  'вам нужен лендинг под услугу, оффер или продукт',
+  'вы хотите быстро запуститься без долгой разработки',
+  'вам важна понятная упаковка под рекламу и заявки',
+  'вы хотите выбрать формат под свой этап роста'
+]
+
+const nonFitList = [
+  'вам нужен сложный многостраничный сайт',
+  'вам нужен полностью уникальный интерфейс с нуля',
+  'у вас пока нет понимания, что именно вы продаете',
+  'вы ищете не лендинг, а большой корпоративный проект'
 ]
 
 const faqItems: FaqItem[] = [
   {
-    question: 'Можно ли редактировать шаблон?',
-    answer: 'Да. Все блоки можно менять: тексты, цвета, порядок секций, медиа и CTA.'
+    question: 'Можно ли редактировать лендинг?',
+    answer: 'Да. Структуру, тексты, изображения, оффер и CTA можно адаптировать под вашу нишу и задачу.'
   },
   {
     question: 'Под какие ниши подходят лендинги?',
-    answer: 'Под услуги, экспертные продукты, e-commerce, онлайн-курсы, b2b и франшизы.'
+    answer: 'Под услуги, экспертов, студии, сервисные компании, B2B, консалтинг, локальный бизнес и другие форматы, где важна быстрая подача оффера и сбор заявок.'
   },
   {
     question: 'Нужен ли разработчик для запуска?',
-    answer: 'Не обязательно. Базовые изменения выполняются без кода, а сложные интеграции можно подключить отдельно.'
+    answer: 'Не всегда. Базовый запуск можно сделать без сложной разработки, а при необходимости мы подскажем или поможем с публикацией и настройкой.'
   },
   {
     question: 'Сколько времени занимает запуск?',
-    answer: 'Обычно от 1 до 3 дней, в зависимости от тарифа и готовности контента.'
+    answer: 'Обычно старт занимает от 1 до 3 дней в зависимости от выбранного тарифа, объема контента и задачи.'
+  },
+  {
+    question: 'Что нужно от меня для старта?',
+    answer: 'Достаточно кратко описать, что вы продаете, кому и какой результат хотите получить. Дальше поможем с выбором формата и структуры.'
+  },
+  {
+    question: 'Можно ли начать со Start, а потом перейти на Business или Premium?',
+    answer: 'Да. Это нормальный сценарий: сначала быстро запуститься, а затем усилить лендинг, когда появится понимание по офферу и трафику.'
+  },
+  {
+    question: 'Что входит в стоимость?',
+    answer: 'В стоимость входит сам лендинг в выбранном формате и базовый набор работ по упаковке. Точный состав зависит от тарифа.'
+  },
+  {
+    question: 'Подойдет ли это под рекламу?',
+    answer: 'Да. Лендинги собираются именно с расчетом на понятную структуру, точки захвата заявок и быстрый запуск трафика.'
   }
+]
+
+const finalCtaTitle = 'Запустите лендинг без долгой разработки'
+const finalCtaSubtitle = 'Выберите подходящий формат и получите страницу, которую можно быстро адаптировать под ваш оффер и запуск рекламы.'
+const finalCtaMicro = 'Подскажем, что выбрать: Start, Business или Premium.'
+
+const microTexts = [
+  'Ответим, какой формат подойдет под вашу задачу',
+  'Без сложного брифа и лишних согласований',
+  'Можно начать с простого варианта и усилить позже',
+  'Достаточно коротко описать вашу услугу',
+  'Поможем выбрать между Start, Business и Premium'
 ]
 
 const faqAccordionItems = computed(() => faqItems.map(item => ({
@@ -454,10 +619,10 @@ useHead({
 })
 
 useSeoMeta({
-  title: 'Готовые лендинги под ваш масштаб бизнеса - запуск за 1-3 дня',
-  description: 'Готовые landing page для старта, роста и масштабирования бизнеса. Выберите тариф, посмотрите демо и запуститесь быстро.',
-  ogTitle: 'Готовые лендинги под ваш масштаб бизнеса',
-  ogDescription: '3 варианта лендингов: Старт, Бизнес и Премиум. Запуск за 1-3 дня.',
+  title: 'Готовые лендинги под запуск рекламы и продажи',
+  description: 'Выберите формат Start, Business или Premium и запустите лендинг под рекламу и продажи за 1-3 дня.',
+  ogTitle: 'Готовые лендинги под запуск рекламы и продажи',
+  ogDescription: 'Start, Business и Premium для быстрого старта, стабильных заявок и высокой упаковки под высокий чек.',
   ogType: 'website'
 })
 </script>
@@ -468,7 +633,7 @@ useSeoMeta({
       <div class="shell topbar-inner">
         <a class="brand" href="#hero">
           <UIcon name="ri:stack-line" />
-          not_shop landing
+          landings-stock.ru
         </a>
         <nav class="topbar-nav" aria-label="Навигация по секциям">
           <UButton href="#plans" variant="ghost" color="neutral" class="topbar-btn">
@@ -477,7 +642,7 @@ useSeoMeta({
           </UButton>
           <UButton href="#demos" variant="ghost" color="neutral" class="topbar-btn">
             <UIcon name="ri:slideshow-3-line" />
-            Демо
+            Примеры
           </UButton>
           <UButton href="#faq" variant="ghost" color="neutral" class="topbar-btn">
             <UIcon name="ri:question-line" />
@@ -493,13 +658,22 @@ useSeoMeta({
           <article class="hero-panel">
             <div class="hero-copy">
               <UBadge color="primary" variant="soft" class="hero-eyebrow">{{ slide.eyebrow }}</UBadge>
-              <h1>{{ slide.title }}</h1>
-              <p>{{ slide.subtitle }}</p>
+              <h1>{{ heroTitle }}</h1>
+              <p>{{ heroSubtitle }}</p>
 
               <div class="hero-actions">
-                <UButton href="#plans" size="lg">Выбрать вариант</UButton>
-                <UButton href="#demos" size="lg" variant="outline" color="neutral">Посмотреть демо</UButton>
+                <UButton href="#plans" size="lg">Выбрать тариф</UButton>
+                <UButton href="#demos" size="lg" variant="outline" color="neutral">Смотреть примеры</UButton>
               </div>
+
+              <p class="hero-micro">{{ heroMicroText }}</p>
+
+              <ul class="issue-list issue-success hero-quick-list">
+                <li v-for="item in heroQuickBenefits" :key="item">
+                  <UIcon name="ri:check-line" />
+                  <span>{{ item }}</span>
+                </li>
+              </ul>
 
               <div class="hero-metrics">
                 <UCard v-for="metric in slide.metrics" :key="metric.label" class="metric-card">
@@ -517,13 +691,17 @@ useSeoMeta({
                     <UIcon :name="slide.icon" />
                     {{ tariffLabel[slide.id] }}
                   </span>
-                  <span class="hero-plan-tag">Запуск 1-3 дня</span>
+                  <span class="hero-plan-tag">{{ slide.planTag }}</span>
                 </div>
               </template>
 
-              <div class="image-placeholder image-placeholder-xl">
-                <UIcon name="ri:image-2-line" />
-                <span>{{ slide.previewLabel }}</span>
+              <div class="hero-preview-image-wrap">
+                <img
+                  :src="slide.previewImage"
+                  :alt="`Превью ${slide.planTag}`"
+                  class="hero-preview-image"
+                  loading="lazy"
+                >
               </div>
 
               <ul class="hero-bullet-list">
@@ -541,14 +719,30 @@ useSeoMeta({
     <section class="section-block audience-section section-reveal">
       <div class="shell">
         <div class="section-head">
+          <UBadge color="primary" variant="soft" class="section-kicker">Trust-блок</UBadge>
+          <h2>Не сайт ради сайта, а лендинг под понятную задачу</h2>
+        </div>
+        <div class="audience-grid trust-grid">
+          <UCard v-for="item in trustItems" :key="item.title" class="feature-card">
+            <div class="feature-card-icon"><UIcon :name="item.icon" /></div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </UCard>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block audience-section section-reveal">
+      <div class="shell">
+        <div class="section-head">
           <UBadge color="primary" variant="soft" class="section-kicker">Для кого это</UBadge>
-          <h2>Решение под разные типы бизнеса</h2>
+          <h2>Решение под разные задачи и этапы роста</h2>
         </div>
         <div class="audience-grid">
           <UCard v-for="item in audienceCards" :key="item.title" class="feature-card">
             <div class="feature-card-icon"><UIcon :name="item.icon" /></div>
             <h3>{{ item.title }}</h3>
-            <p>{{ item.pain }}</p>
+            <p>{{ item.description }}</p>
           </UCard>
         </div>
       </div>
@@ -558,7 +752,7 @@ useSeoMeta({
       <div class="shell">
         <div class="section-head section-head-light">
           <UBadge color="neutral" variant="soft" class="section-kicker">Проблема и решение</UBadge>
-          <h2>Снимаем барьеры до запуска рекламы</h2>
+          <h2>Что обычно тормозит запуск - и как это решается</h2>
         </div>
 
         <div class="problem-layout">
@@ -577,12 +771,12 @@ useSeoMeta({
 
             <UCard class="card-dark card-dark-success">
               <template #header>
-                <h3><UIcon name="ri:checkbox-circle-line" /> Что это решает</h3>
+                <h3><UIcon name="ri:checkbox-circle-line" /> Что вы получаете вместо этого</h3>
               </template>
               <ul class="issue-list issue-success">
-                <li v-for="solution in solutions" :key="solution.title">
+                <li v-for="solution in problemSolutions" :key="solution">
                   <UIcon name="ri:check-line" />
-                  <span>{{ solution.title }}</span>
+                  <span>{{ solution }}</span>
                 </li>
               </ul>
             </UCard>
@@ -600,14 +794,14 @@ useSeoMeta({
     <section class="section-block audience-section section-reveal">
       <div class="shell">
         <div class="section-head">
-          <UBadge color="primary" variant="soft" class="section-kicker">Решение</UBadge>
-          <h2>Что получаете вы</h2>
+          <UBadge color="primary" variant="soft" class="section-kicker">Что вы получаете</UBadge>
+          <h2>Что вы получаете после запуска</h2>
         </div>
         <div class="audience-grid">
-          <UCard v-for="solution in solutions" :key="solution.title" class="feature-card">
-            <div class="feature-card-icon"><UIcon :name="solution.icon" /></div>
-            <h3>{{ solution.title }}</h3>
-            <p>{{ solution.description }}</p>
+          <UCard v-for="item in benefits" :key="item.title" class="feature-card">
+            <div class="feature-card-icon"><UIcon :name="item.icon" /></div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
           </UCard>
         </div>
       </div>
@@ -617,7 +811,7 @@ useSeoMeta({
       <div class="shell">
         <div class="section-head">
           <UBadge color="primary" variant="soft" class="section-kicker">Тарифы</UBadge>
-          <h2>Выберите подходящий вариант</h2>
+          <h2>Выберите формат под свою задачу</h2>
         </div>
 
         <div class="pricing-grid">
@@ -634,7 +828,7 @@ useSeoMeta({
             </div>
 
             <h3>{{ plan.title }}</h3>
-            <p class="plan-summary">{{ plan.summary }}</p>
+            <p class="plan-summary">{{ plan.description }}</p>
 
             <ul class="issue-list issue-success">
               <li v-for="feature in plan.features" :key="`${plan.id}-${feature}`">
@@ -647,10 +841,29 @@ useSeoMeta({
 
             <div class="plan-actions">
               <UButton href="#demos" variant="outline" color="neutral">Посмотреть демо</UButton>
-              <UButton href="#final-cta">Выбрать</UButton>
+              <UButton href="#final-cta">{{ plan.selectLabel }}</UButton>
             </div>
           </UCard>
         </div>
+      </div>
+    </section>
+
+    <section class="section-block audience-section section-reveal">
+      <div class="shell">
+        <div class="section-head">
+          <UBadge color="primary" variant="soft" class="section-kicker">Как выбрать</UBadge>
+          <h2>Как понять, какой вариант вам подходит</h2>
+        </div>
+
+        <div class="audience-grid choose-grid">
+          <UCard v-for="option in chooseOptions" :key="option.id" class="feature-card">
+            <div class="feature-card-icon"><UIcon :name="option.icon" /></div>
+            <h3>{{ option.title }}</h3>
+            <p>{{ option.description }}</p>
+          </UCard>
+        </div>
+
+        <p class="choose-help">{{ chooseMicroCta }}</p>
       </div>
     </section>
 
@@ -676,15 +889,15 @@ useSeoMeta({
           </li>
         </ol>
 
-        <p class="flow-help">При необходимости помогаем с настройкой и публикацией.</p>
+        <p class="flow-help">{{ flowHelpText }}</p>
       </div>
     </section>
 
     <section id="demos" class="section-block demo-section section-reveal">
       <div class="shell">
         <div class="section-head">
-          <UBadge color="primary" variant="soft" class="section-kicker">Примеры лендингов</UBadge>
-          <h2>Демо по тарифам</h2>
+          <UBadge color="primary" variant="soft" class="section-kicker">Демо по тарифам</UBadge>
+          <h2>Посмотрите, как выглядит каждый формат</h2>
         </div>
 
         <UTabs
@@ -708,6 +921,7 @@ useSeoMeta({
               </div>
             </div>
             <h3>{{ demo.title }}</h3>
+            <p class="demo-description">{{ demo.description }}</p>
             <p class="demo-tariff">
               <UIcon name="ri:price-tag-3-line" />
               Тариф: {{ tariffLabel[demo.tariff] }}
@@ -721,8 +935,8 @@ useSeoMeta({
     <section class="section-block audience-section section-reveal">
       <div class="shell">
         <div class="section-head">
-          <UBadge color="primary" variant="soft" class="section-kicker">Что входит</UBadge>
-          <h2>База для быстрого запуска</h2>
+          <UBadge color="primary" variant="soft" class="section-kicker">Что входит в основу</UBadge>
+          <h2>База, на которой можно быстро запускаться</h2>
         </div>
         <div class="audience-grid include-grid">
           <UCard v-for="item in includedFeatures" :key="item.title" class="feature-card">
@@ -747,20 +961,64 @@ useSeoMeta({
       </div>
     </section>
 
+    <section class="section-block section-reveal">
+      <div class="shell">
+        <UCard class="compare-cta-card">
+          <h2>{{ comparisonCtaTitle }}</h2>
+          <p>{{ comparisonCtaText }}</p>
+          <div class="cta-actions">
+            <UButton href="#plans" size="lg">Подобрать тариф</UButton>
+            <UButton href="#footer" size="lg" color="neutral" variant="outline">Получить консультацию</UButton>
+          </div>
+        </UCard>
+      </div>
+    </section>
+
     <section class="section-block section-dark testimonial-section section-reveal">
       <div class="shell">
         <div class="section-head section-head-light">
-          <UBadge color="neutral" variant="soft" class="section-kicker">Отзывы и кейсы</UBadge>
-          <h2>Реальные результаты после запуска</h2>
+          <UBadge color="neutral" variant="soft" class="section-kicker">Кейсы</UBadge>
+          <h2>Примеры задач, под которые подходят лендинги</h2>
         </div>
 
         <div class="testimonial-grid">
-          <UCard v-for="item in testimonials" :key="item.company" class="testimonial-card">
+          <UCard v-for="item in caseItems" :key="item.title" class="testimonial-card">
             <UIcon name="ri:double-quotes-l" />
-            <div class="image-placeholder image-placeholder-sm">Заглушка: скрин результата</div>
-            <h3>{{ item.company }}</h3>
-            <p class="testimonial-result">{{ item.result }}</p>
-            <p>{{ item.quote }}</p>
+            <div class="image-placeholder image-placeholder-sm">Заглушка: пример лендинга</div>
+            <h3>{{ item.title }}</h3>
+            <p class="testimonial-result">{{ item.subtitle }}</p>
+            <p>{{ item.description }}</p>
+          </UCard>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block audience-section section-reveal">
+      <div class="shell">
+        <div class="section-head">
+          <UBadge color="primary" variant="soft" class="section-kicker">Кому подойдет</UBadge>
+          <h2>Когда это решение подойдет, а когда нет</h2>
+        </div>
+
+        <div class="fit-grid">
+          <UCard class="fit-card">
+            <h3>Подойдет, если</h3>
+            <ul class="issue-list issue-success">
+              <li v-for="item in fitList" :key="item">
+                <UIcon name="ri:check-line" />
+                <span>{{ item }}</span>
+              </li>
+            </ul>
+          </UCard>
+
+          <UCard class="fit-card">
+            <h3>Не подойдет, если</h3>
+            <ul class="issue-list issue-danger">
+              <li v-for="item in nonFitList" :key="item">
+                <UIcon name="ri:close-line" />
+                <span>{{ item }}</span>
+              </li>
+            </ul>
           </UCard>
         </div>
       </div>
@@ -770,7 +1028,7 @@ useSeoMeta({
       <div class="shell">
         <div class="section-head">
           <UBadge color="primary" variant="soft" class="section-kicker">FAQ</UBadge>
-          <h2>Частые вопросы перед покупкой</h2>
+          <h2>Частые вопросы перед запуском</h2>
         </div>
 
         <UAccordion type="single" collapsible :items="faqAccordionItems" />
@@ -780,12 +1038,20 @@ useSeoMeta({
     <section id="final-cta" class="section-block final-cta section-reveal">
       <div class="shell">
         <UCard class="cta-card">
-          <h2>Запустите лендинг уже сегодня</h2>
-          <p>Выберите тариф и начните получать заявки без долгой разработки.</p>
+          <h2>{{ finalCtaTitle }}</h2>
+          <p>{{ finalCtaSubtitle }}</p>
+          <p class="cta-micro">{{ finalCtaMicro }}</p>
           <div class="cta-actions">
             <UButton href="#plans" size="lg">Выбрать тариф</UButton>
             <UButton href="#footer" size="lg" color="neutral" variant="outline">Получить консультацию</UButton>
           </div>
+
+          <ul class="micro-copy-list">
+            <li v-for="item in microTexts" :key="item">
+              <UIcon name="ri:check-line" />
+              <span>{{ item }}</span>
+            </li>
+          </ul>
         </UCard>
       </div>
     </section>
@@ -794,11 +1060,11 @@ useSeoMeta({
       <div class="shell footer-inner">
         <p class="footer-brand">
           <UIcon name="ri:stack-line" />
-          not_shop landing
+          landings-stock.ru
         </p>
-        <a href="mailto:hello@notshop.ru">
+        <a href="mailto:hello@landings-stock.ru">
           <UIcon name="ri:mail-line" />
-          hello@notshop.ru
+          hello@landings-stock.ru
         </a>
         <a href="#">
           <UIcon name="ri:shield-check-line" />
