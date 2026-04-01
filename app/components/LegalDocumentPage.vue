@@ -5,14 +5,27 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+const canonicalUrl = computed(() => new URL(route.path, `${siteConfig.siteUrl}/`).toString())
 
 useSeoMeta({
   title: props.title,
   description: props.description ?? `Документ: ${props.title}`,
   ogTitle: props.title,
   ogDescription: props.description ?? `Документ: ${props.title}`,
-  ogType: 'article'
+  ogType: 'article',
+  ogUrl: () => canonicalUrl.value
 })
+
+useHead(() => ({
+  link: [
+    {
+      rel: 'canonical',
+      href: canonicalUrl.value
+    }
+  ]
+}))
 </script>
 
 <template>
@@ -21,7 +34,7 @@ useSeoMeta({
       <div class="shell topbar-inner">
         <NuxtLink class="brand" to="/">
           <UIcon name="ri:stack-line" />
-          landings-stock.ru
+          {{ siteConfig.domain }}
         </NuxtLink>
         <UButton to="/" variant="ghost" color="neutral" class="topbar-btn">
           <UIcon name="ri:arrow-left-line" />

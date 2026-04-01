@@ -1,13 +1,14 @@
-# Landing Project (Nuxt 4 + Vue 3)
+﻿# Landing Project (Nuxt 4 + Vue 3)
 
-Лендинг с 12 секциями, адаптивной версткой, якорями, фиксированной CTA-кнопкой и готовой Docker-сборкой для production.
+Лендинг с адаптивной вёрсткой, анимациями, юридическими страницами из markdown-контента и production-режимом через Docker.
 
 ## Стек
 
 - Nuxt 4
-- Vue 3
-- TypeScript (`script setup`)
-- CSS (без UI-фреймворка)
+- Vue 3 + TypeScript (`script setup`)
+- Nuxt UI + Tailwind CSS
+- GSAP (анимации)
+- Markdown content layer для юридических документов
 
 ## Локальная разработка
 
@@ -16,12 +17,16 @@ npm install
 npm run dev
 ```
 
-Проект откроется на `http://localhost:3000`.
+Приложение доступно на `http://localhost:3000`.
 
-## Проверка типов
+## Проверки качества
 
 ```bash
 npm run typecheck
+npm run lint
+npm run format:check
+npm run test:unit
+npm run test:e2e
 ```
 
 ## Production (локально без Docker)
@@ -49,4 +54,7 @@ docker compose down
 docker compose logs -f
 ```
 
-По умолчанию приложение доступно на `http://localhost:3000`.
+## CI
+
+В репозитории добавлен workflow `.github/workflows/ci.yml`.
+Пайплайн запускает: `typecheck`, `lint`, `format:check`, `test:unit`, `test:e2e`, `build`.
