@@ -282,10 +282,7 @@ useSeoMeta({
           <UCard v-for="demo in filteredDemos" :key="demo.id" class="demo-card">
             <div class="demo-media">
               <UIcon :name="demo.icon" />
-              <div class="image-placeholder image-placeholder-lg">
-                <UIcon name="ri:image-2-line" />
-                <span>Заглушка: {{ demo.format }}</span>
-              </div>
+              <img :src="demo.image" :alt="demo.title" class="demo-image" loading="lazy" />
             </div>
             <h3>{{ demo.title }}</h3>
             <p class="demo-description">{{ demo.description }}</p>
@@ -353,7 +350,7 @@ useSeoMeta({
         <div class="testimonial-grid">
           <UCard v-for="item in caseItems" :key="item.title" class="testimonial-card">
             <UIcon name="ri:double-quotes-l" />
-            <div class="image-placeholder image-placeholder-sm">Заглушка: пример лендинга</div>
+            <img :src="item.image" :alt="item.title" class="testimonial-image" loading="lazy" />
             <h3>{{ item.title }}</h3>
             <p class="testimonial-result">{{ item.subtitle }}</p>
             <p>{{ item.description }}</p>

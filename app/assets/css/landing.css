@@ -548,6 +548,14 @@
   color: var(--brand);
 }
 
+.demo-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
 .demo-card h3 {
   margin-top: 0.72rem;
   font-size: 1rem;
@@ -630,6 +638,15 @@
 .testimonial-card > .iconify {
   color: var(--quote-accent);
   font-size: 1.18rem;
+}
+
+.testimonial-image {
+  display: block;
+  width: 100%;
+  margin-top: 0.58rem;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--line-on-dark);
 }
 
 .testimonial-card h3 {

@@ -67,6 +67,7 @@ export interface DemoItem {
   description: string
   format: string
   icon: string
+  image: string
 }
 
 export interface IncludedFeature {
@@ -86,6 +87,7 @@ export interface CaseItem {
   title: string
   subtitle: string
   description: string
+  image: string
 }
 
 export interface FaqItem {
@@ -383,7 +385,8 @@ export const demoItems: DemoItem[] = [
     title: 'Start - быстрый запуск',
     description: 'Минимум лишнего, чистая структура и быстрый выход в рекламу.',
     format: 'Скриншот / видео',
-    icon: 'ri:image-2-line'
+    icon: 'ri:image-2-line',
+    image: '/images/cases/start.jpg'
   },
   {
     id: 'demo-business',
@@ -391,7 +394,8 @@ export const demoItems: DemoItem[] = [
     title: 'Business - стабильный поток заявок',
     description: 'Больше доверия, глубже упаковка и сильнее подача оффера.',
     format: 'Скриншот / видео',
-    icon: 'ri:play-circle-line'
+    icon: 'ri:play-circle-line',
+    image: '/images/cases/businnes.jpg'
   },
   {
     id: 'demo-premium',
@@ -399,7 +403,8 @@ export const demoItems: DemoItem[] = [
     title: 'Premium - под высокий чек',
     description: 'Статусная подача, усиленная аргументация и серьезное ощущение продукта.',
     format: 'Скриншот / видео',
-    icon: 'ri:slideshow-4-line'
+    icon: 'ri:slideshow-4-line',
+    image: '/images/cases/premium.jpg'
   }
 ]
 
@@ -466,19 +471,22 @@ export const caseItems: CaseItem[] = [
     title: 'Лендинг для запуска новой услуги',
     subtitle: 'Быстро собрали страницу под тест ниши.',
     description:
-      'Сделали понятную структуру, оффер и форму заявки, чтобы можно было выйти в рекламу без долгой разработки.'
+      'Сделали понятную структуру, оффер и форму заявки, чтобы можно было выйти в рекламу без долгой разработки.',
+    image: '/images/cases/start.jpg'
   },
   {
     title: 'Лендинг для сервисной компании',
     subtitle: 'Усилили доверие и подачу оффера.',
     description:
-      'Добавили блоки выгод, отзывы, несколько CTA и более сильную упаковку под стабильный поток заявок.'
+      'Добавили блоки выгод, отзывы, несколько CTA и более сильную упаковку под стабильный поток заявок.',
+    image: '/images/cases/businnes.jpg'
   },
   {
     title: 'Лендинг для дорогой услуги',
     subtitle: 'Сделали серьезную подачу под высокий чек.',
     description:
-      'Собрали премиальную структуру, усилили аргументацию и подготовили страницу под сложную продажу.'
+      'Собрали премиальную структуру, усилили аргументацию и подготовили страницу под сложную продажу.',
+    image: '/images/cases/premium.jpg'
   }
 ]
 
