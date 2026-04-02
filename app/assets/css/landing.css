@@ -1,6 +1,7 @@
 .landing {
   min-height: 100vh;
-  padding-bottom: 5.8rem;
+  padding-bottom: 0;
+  overflow-x: clip;
 }
 
 .topbar-btn,
@@ -39,6 +40,14 @@
   border-right: 0;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(246, 251, 255, 0.9));
   box-shadow: var(--shadow-soft);
+}
+
+.hero-carousel [data-slot='prev'] {
+  inset-inline-start: 0.75rem !important;
+}
+
+.hero-carousel [data-slot='next'] {
+  inset-inline-end: 0.75rem !important;
 }
 
 .hero-panel {
@@ -941,10 +950,6 @@
 }
 
 @media (max-width: 760px) {
-  .landing {
-    padding-bottom: 7.2rem;
-  }
-
   .section-block {
     padding: 1.6rem 0;
   }
