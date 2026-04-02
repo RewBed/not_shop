@@ -1,5 +1,3 @@
-import matter from 'gray-matter'
-import MarkdownIt from 'markdown-it'
 import type { SiteConfig } from '~/composables/useSiteConfig'
 
 import ofertaSource from './oferta.md?raw'
@@ -20,18 +18,76 @@ interface LegalDocument {
   html: string
 }
 
-const markdown = new MarkdownIt({
-  html: false,
-  linkify: true,
-  typographer: true
-})
+const FRONTMATTER_OPEN = '---\n'
+const FRONTMATTER_CLOSE = '\n---\n'
+
+function unwrapQuotedValue(value: string): string {
+  const trimmed = value.trim()
+
+  if (
+    (trimmed.startsWith("'") && trimmed.endsWith("'")) ||
+    (trimmed.startsWith('"') && trimmed.endsWith('"'))
+  ) {
+    return trimmed.slice(1, -1)
+  }
+
+  return trimmed
+}
+
+function parseFrontmatter(rawFrontmatter: string): Record<string, string> {
+  const metadata: Record<string, string> = {}
+
+  for (const line of rawFrontmatter.split('\n')) {
+    const trimmedLine = line.trim()
+
+    if (!trimmedLine) {
+      continue
+    }
+
+    const separatorIndex = trimmedLine.indexOf(':')
+
+    if (separatorIndex <= 0) {
+      continue
+    }
+
+    const key = trimmedLine.slice(0, separatorIndex).trim()
+    const value = trimmedLine.slice(separatorIndex + 1)
+
+    metadata[key] = unwrapQuotedValue(value)
+  }
+
+  return metadata
+}
 
 function parseTemplate(source: string): LegalDocumentTemplate {
-  const parsed = matter(source)
+  const normalizedSource = source.replace(/\r\n/g, '\n')
+
+  if (!normalizedSource.startsWith(FRONTMATTER_OPEN)) {
+    return {
+      title: '',
+      description: '',
+      content: normalizedSource.trim()
+    }
+  }
+
+  const frontmatterCloseIndex = normalizedSource.indexOf(FRONTMATTER_CLOSE, FRONTMATTER_OPEN.length)
+
+  if (frontmatterCloseIndex === -1) {
+    return {
+      title: '',
+      description: '',
+      content: normalizedSource.trim()
+    }
+  }
+
+  const frontmatter = normalizedSource.slice(FRONTMATTER_OPEN.length, frontmatterCloseIndex)
+  const content = normalizedSource.slice(frontmatterCloseIndex + FRONTMATTER_CLOSE.length).trim()
+  const metadata = parseFrontmatter(frontmatter)
+
   return {
-    title: String(parsed.data.title ?? ''),
-    description: String(parsed.data.description ?? ''),
-    content: parsed.content.trim()
+    title: metadata.title ?? '',
+    description: metadata.description ?? '',
+    content
   }
 }
 
@@ -50,11 +106,11 @@ const legalTemplates: Record<LegalDocumentSlug, LegalDocumentTemplate> = {
 }
 
 export function getLegalDocument(slug: LegalDocumentSlug, siteConfig: SiteConfig): LegalDocument {
-  const source = legalTemplates[slug]
+  const template = legalTemplates[slug]
 
   return {
-    title: applyPlaceholders(source.title, siteConfig),
-    description: applyPlaceholders(source.description, siteConfig),
-    html: markdown.render(applyPlaceholders(source.content, siteConfig))
+    title: applyPlaceholders(template.title, siteConfig),
+    description: applyPlaceholders(template.description, siteConfig),
+    html: applyPlaceholders(template.content, siteConfig)
   }
 }

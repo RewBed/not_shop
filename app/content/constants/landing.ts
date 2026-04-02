@@ -371,9 +371,9 @@ export const flowHelpText =
 
 export const demoTabs = [
   { value: 'all', label: 'Все тарифы', icon: 'ri:list-check-2' },
-  { value: 'start', label: 'Start', icon: 'ri:seedling' },
-  { value: 'business', label: 'Business', icon: 'ri:briefcase-4' },
-  { value: 'premium', label: 'Premium', icon: 'ri:vip-crown-2' }
+  { value: 'start', label: 'Start', icon: 'ri:seedling-line' },
+  { value: 'business', label: 'Business', icon: 'ri:briefcase-4-line' },
+  { value: 'premium', label: 'Premium', icon: 'ri:vip-crown-2-line' }
 ]
 
 export const demoItems: DemoItem[] = [
